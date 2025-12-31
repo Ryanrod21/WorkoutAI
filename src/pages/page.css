@@ -112,3 +112,34 @@ h1 {
     transform: rotate(360deg);
   }
 }
+
+/* Each radio row */
+.demo-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+}
+
+/* Selected option */
+.demo-option.active {
+  opacity: 1;
+  background: #eef2ff;
+  border-color: #6366f1;
+}
+
+/* Radio input */
+.demo-option input {
+  accent-color: #6366f1;
+  margin: 0;
+}
+
+/* Text */
+.demo-option span {
+  color: black;
+}

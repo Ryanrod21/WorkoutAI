@@ -57,4 +57,5 @@
 .nav-links a:hover,
 .nav-links button:hover {
   text-decoration: underline;
+  background-color: transparent;
 }

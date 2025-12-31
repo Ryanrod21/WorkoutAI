@@ -92,7 +92,7 @@ export default function App() {
 
         <Button
           className="free"
-          onClick={() => navigate('/starting')}
+          onClick={() => navigate('/demo')}
           label={'Try for free'}
         />
       </div>

@@ -9,12 +9,14 @@ import SelectedWorkout from './pages/SelectedWorkout';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import Navigation from './components/Navigation';
+import Demo from './pages/Demo';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <Navigation />
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/demo" element={<Demo />} />
       <Route path="/starting" element={<LandingPage />} />
       <Route path="/results" element={<Agent />} />
       <Route path="/selected-workout" element={<SelectedWorkout />} />
