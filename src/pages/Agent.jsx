@@ -111,10 +111,10 @@ export default function Agent() {
 
   return (
     <div style={{ padding: 40, maxWidth: 900, margin: '0 auto' }}>
-      <h1>Your Workout Summary</h1>
-      {userName && <h2>Welcome, {userName}</h2>}
+      <h1 style={{ color: 'white' }}>Your Workout Summary</h1>
+      {userName && <h2 style={{ color: 'white' }}>Welcome, {userName}</h2>}
 
-      <section style={{ marginBottom: 20 }}>
+      <section className="section-results" style={{ marginBottom: 20 }}>
         <p>
           <strong>Goal:</strong> {state.goal}
         </p>
@@ -128,7 +128,7 @@ export default function Agent() {
 
       <hr />
 
-      <h2>AI Suggested Workout Plans</h2>
+      <h2 style={{ color: 'white' }}>AI Suggested Workout Plans</h2>
 
       {state.plans.map((plan, index) => (
         <div
@@ -140,8 +140,8 @@ export default function Agent() {
               pickedIndex === index
                 ? '#28a745'
                 : expandedIndex === index
-                ? '#007bff'
-                : '#ddd',
+                ? 'white'
+                : 'white',
             padding: 20,
             marginBottom: 20,
             borderRadius: 8,
@@ -149,14 +149,14 @@ export default function Agent() {
               pickedIndex === index
                 ? '#e6ffed'
                 : expandedIndex === index
-                ? '#f0f8ff'
-                : 'white',
+                ? '#76bdffff'
+                : '#76bdffff',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
           }}
         >
           <h3>Plan {index + 1}</h3>
-          <p>
+          <p style={{ color: 'black' }}>
             <strong>Summary:</strong> {plan.plan_summary}
           </p>
 

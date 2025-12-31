@@ -1,9 +1,13 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
+import { useNavigate } from 'react-router-dom';
 
 export default function SelectedWorkout() {
   const [workout, setWorkout] = useState(null);
   const [saving, setSaving] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchWorkout = async () => {
@@ -59,9 +63,13 @@ export default function SelectedWorkout() {
     setSaving(false);
   };
 
+  const handleResults = () => {
+    navigate('/results');
+  };
+
   return (
     <div style={{ padding: 40, maxWidth: 900, margin: '0 auto' }}>
-      <h1>Your Workout Plan</h1>
+      <h1 style={{ color: 'white' }}>Your Workout Plan</h1>
 
       {/* ✅ SELECTED PLAN — EXPANDED */}
       {selectedPlan && (
@@ -134,7 +142,7 @@ export default function SelectedWorkout() {
       )}
 
       {/* 🔁 OTHER PLANS — COLLAPSED */}
-      <h3>Other Saved Plans</h3>
+      <h2 style={{ color: 'white' }}>Other Saved Plans</h2>
 
       {otherPlans.map((plan, index) => {
         const realIndex = workout.plans.indexOf(plan);
@@ -149,7 +157,7 @@ export default function SelectedWorkout() {
               marginBottom: 16,
             }}
           >
-            <p>{plan.plan_summary}</p>
+            <h4 style={{ color: 'white' }}>{plan.plan_summary}</h4>
 
             <button
               disabled={saving}
@@ -168,6 +176,8 @@ export default function SelectedWorkout() {
           </div>
         );
       })}
+
+      <button onClick={handleResults}>Back to results</button>
     </div>
   );
 }
