@@ -25,3 +25,22 @@
 .free:hover:not(:disabled) {
   background-color: rgb(0, 100, 0);
 }
+
+.nav-container {
+  background-color: #3b82f6;
+  padding: 0 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  display: inline-flex;
+  text-decoration: none;
+  color: white;
+}

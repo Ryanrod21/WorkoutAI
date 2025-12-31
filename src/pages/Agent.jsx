@@ -178,7 +178,11 @@ export default function Agent() {
                   opacity: saving ? 0.7 : 1,
                 }}
               >
-                {saving ? 'Saving...' : 'I pick this workout'}
+                {saving
+                  ? 'Saving...'
+                  : pickedIndex === index
+                  ? 'Open Workout'
+                  : 'I pick this workout'}
               </button>
             </div>
           )}
