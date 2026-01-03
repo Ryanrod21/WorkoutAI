@@ -18,21 +18,52 @@
   cursor: not-allowed;
 }
 
-.free {
-  background-color: green;
+.free-btn {
+  margin-top: 20px;
+  background-color: rgb(41, 208, 238);
+  padding: 2rem 3rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2),
+    0 4px 6px -4px rgba(59, 130, 246, 0.2);
+  transition: all 0.2s ease-in-out;
 }
 
-.free:hover:not(:disabled) {
-  background-color: rgb(0, 100, 0);
+.free-btn:hover {
+  background-color: rgba(59, 130, 246, 0.9);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3),
+    0 8px 10px -6px rgba(59, 130, 246, 0.3);
+  transform: scale(1.05);
 }
+
+.log-in-sign-up-btn {
+  margin-top: 20px;
+  background-color: rgb(41, 208, 238);
+  padding: 15px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2),
+    0 4px 6px -4px rgba(59, 130, 246, 0.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.log-in-sign-up-btn:hover {
+  background-color: rgba(59, 130, 246, 0.9);
+  box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.3),
+    0 8px 10px -6px rgba(59, 130, 246, 0.3);
+  transform: scale(1.05);
+}
+
+/* Navigation */
 
 .nav-container {
-  background-color: #083988;
   padding: 10px 200px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid rgb(41, 208, 238);
 }
 
 .nav-container h1 {
@@ -63,4 +94,33 @@
 .nav-links button:hover {
   text-decoration: underline;
   background-color: transparent;
+}
+
+.home-card {
+  width: 300px;
+  height: 220px;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.562);
+  border-radius: 12px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+}
+
+.home-card svg {
+  width: 70px;
+  height: 70px;
+}
+
+.home-card h3 {
+  color: white;
+  font-size: 25px;
+}
+
+.home-card p {
+  color: gray;
+  font-size: 19px;
 }

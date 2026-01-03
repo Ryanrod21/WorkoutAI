@@ -88,6 +88,11 @@ export default function Questionnaire() {
 
   return (
     <div className="landing-page">
+      <div class="bg-wrapper">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+      </div>
+
       {loading && (
         <div className="loading-screen">
           <div className="loader"></div>

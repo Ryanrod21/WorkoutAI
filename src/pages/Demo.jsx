@@ -28,7 +28,7 @@ const slides = [
     autoPick: 1,
   },
   {
-    text: 'Comparing workout plans...',
+    text: 'Our coach is working on the plans...',
     options: [],
   },
   {
@@ -75,6 +75,10 @@ export default function Demo() {
 
   return (
     <div className="landing-page">
+      <div class="bg-wrapper">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+      </div>
       <div className="card step-card">
         {Array.isArray(slide.text) ? (
           <div className="intro-text">

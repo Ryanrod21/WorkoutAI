@@ -8,6 +8,6 @@ export async function testSupabase() {
     return 'Supabase error ❌';
   }
 
-  console.log('Supabase data:', data);
+  console.log('Supabase data: adsf', data);
   return 'Supabase working ✅';
 }
