@@ -132,7 +132,9 @@ export default function App() {
           />
         </div>
       </div>
-      <p>Get your workout plans in minutes !</p>
+      <div style={{ marginTop: '30px', color: 'white' }}>
+        <p>Get your workout plans in minutes !</p>
+      </div>
     </div>
   );
 }

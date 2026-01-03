@@ -42,6 +42,10 @@ export default function AgentDemo() {
 
   return (
     <div style={{ padding: 40, maxWidth: 900, margin: '0 auto' }}>
+      <div class="bg-wrapper">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+      </div>
       <h1 style={{ color: 'white' }}>Your Workout Summary</h1>
       <h2 style={{ color: 'white' }}>Welcome, {userName}</h2>
 
@@ -59,13 +63,16 @@ export default function AgentDemo() {
 
       <hr />
 
-      <h2 style={{ color: 'white' }}>AI Suggested Workout Plans</h2>
+      <h2 style={{ color: 'white', margin: '20px 0' }}>
+        AI Suggested Workout Plans
+      </h2>
 
       {state.plans.map((plan, index) => (
         <div
           key={index}
           onClick={() => handleExpand(index)}
           style={{
+            color: 'white',
             border: '2px solid',
             borderColor:
               pickedIndex === index
@@ -76,13 +83,14 @@ export default function AgentDemo() {
             padding: 20,
             marginBottom: 20,
             borderRadius: 8,
-            backgroundColor: pickedIndex === index ? '#e6ffed' : '#76bdffff',
+            backgroundColor:
+              pickedIndex === index ? '#e6ffed' : 'rgba(0, 0, 0, 0.562)',
             cursor: 'pointer',
             transition: 'all 0.3s ease',
           }}
         >
           <h3>Plan {index + 1}</h3>
-          <p style={{ color: 'black' }}>
+          <p style={{ color: 'white' }}>
             <strong>Summary:</strong> {plan.plan_summary}
           </p>
 

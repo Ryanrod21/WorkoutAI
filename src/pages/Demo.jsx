@@ -37,8 +37,8 @@ const slides = [
   },
 ];
 
-const PICK_DELAY = 2200; // wait before radio checks
-const NEXT_DELAY = 3600; // wait before moving to next slide
+const PICK_DELAY = 6200; // wait before radio checks
+const NEXT_DELAY = 7600; // wait before moving to next slide
 
 export default function Demo() {
   const [slideIndex, setSlideIndex] = useState(0);
