@@ -132,12 +132,12 @@ export default function AgentDemo() {
               <div className="plan-title">
                 <h3>{plan.plan}</h3>
                 <p>{plan.detail}</p>
-              </div>
-            </div>
 
             <p className="plan-summary">
               <strong>Summary:</strong> {plan.plan_summary}
             </p>
+              </div>
+            </div>
           </div>
         );
       })}

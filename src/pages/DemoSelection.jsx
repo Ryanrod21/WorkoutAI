@@ -55,15 +55,18 @@ export default function DemoSelection() {
           <div className="icon-small-div picked">
             {Icon && <Icon className="icon-small picked" />}
           </div>
+        
           <div className="plan-title">
             <h3>{selectedPlan.plan}</h3>
             <p>{selectedPlan.detail}</p>
-          </div>
-        </div>
 
+        
         <p className="plan-summary">
           <strong>Summary:</strong> {selectedPlan.plan_summary}
         </p>
+          </div>
+        </div>
+        
       </div>
     </div>
   );

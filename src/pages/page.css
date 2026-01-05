@@ -322,6 +322,12 @@ hr {
   background-color: rgba(0, 0, 0, 0.56);
   cursor: pointer;
   transition: all 0.3s ease;
+
+}
+
+.plan-title{
+  display: flex;
+  flex-direction: column;
 }
 
 .plan-title h3 {
@@ -350,7 +356,7 @@ hr {
 .plan-header {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .plan-summary {
