@@ -12,7 +12,7 @@ function Navigation() {
   const location = useLocation();
 
   const showSignUp =
-    location.pathname === '/demo' || location.pathname === '/demo-agent';
+    location.pathname === '/demo' || location.pathname === '/demo-agent' || location.pathname === '/demo-selection';
 
   useEffect(() => {
     // Get initial session

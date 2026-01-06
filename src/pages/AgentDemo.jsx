@@ -14,8 +14,9 @@ export default function AgentDemo() {
 
   const state = {
     goal: 'Build Muscle',
-    days: 3,
+    days: '2-3 days a week',
     location: 'Gym',
+    minutes: '60',
     plans: [
       {
         plan: 'Strength Builder',
@@ -68,10 +69,11 @@ export default function AgentDemo() {
         plan: plan.plan,
         detail: plan.detail,
         plan_summary: plan.plan_summary,
+        expect: plan.expect,
         iconName: plan.iconName, // <- THIS IS THE KEY FIX
       };
 
-      console.log('Serializing plan:', serializablePlan); // check here
+      // console.log('Serializing plan:', serializablePlan); // check here
 
       navigate('/demo-selection', {
         state: {
@@ -153,6 +155,12 @@ export default function AgentDemo() {
                     </li>
                   ))}
                 </ul>
+              </div>
+            )}
+
+            {expandedIndex && (
+              <div className="blur-card">
+              <p>Sign up for results</p>
               </div>
             )}
 
