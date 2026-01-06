@@ -101,8 +101,6 @@ export default function AgentDemo() {
 
       <hr />
 
-      <h2 className="section-title">AI Suggested Workout Plans</h2>
-
       {state.plans.map((plan, index) => {
         const Icon = plan.icon;
 

@@ -9,6 +9,8 @@ export default function Questionnaire() {
   const [goalText, setGoalText] = useState('');
   const [daysText, setDaysText] = useState(null);
   const [trainText, setTrainText] = useState('');
+  const [experienceText, setExperienceText] = useState('');
+  const [minutesText, setMintuesText] = useState('');
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -24,7 +26,13 @@ export default function Questionnaire() {
       return;
     }
 
-    const payload = { goal: goalText, days: daysText, train: trainText };
+    const payload = {
+      goal: goalText,
+      days: daysText,
+      train: trainText,
+      experience: experienceText,
+      minutes: minutesText,
+    };
     setLoading(true);
 
     try {
@@ -48,6 +56,8 @@ export default function Questionnaire() {
         goal: goalText,
         days: daysText,
         train: trainText,
+        minutes: minutesText,
+        experience: experienceText,
         plans: aiResults,
       };
 
@@ -59,7 +69,9 @@ export default function Questionnaire() {
             goal: goalText,
             days: daysText,
             location: trainText,
-            plans: aiResults, // all 3 plans
+            experience: experienceText,
+            minutes: minutesText,
+            plans: aiResults,
             user_id: user.id,
             selected_plan: null, // not picked yet
           },
@@ -117,13 +129,13 @@ export default function Questionnaire() {
       {/* STEP 1 – GOAL SELECTION */}
       {step === 1 && (
         <div className="card step-card">
-          <h1>What is your goal?</h1>
+          <h1>Select your fitness goal</h1>
           <div className="radio-group">
             {[
-              'Lose weight',
-              'Gain muscle',
-              'Run a marathon',
-              'Bodybuilding',
+              'Lose Weight',
+              'Build Muscle',
+              'Improve Endurance',
+              'Genral Fitness',
             ].map((goal) => (
               <label key={goal}>
                 <input
@@ -143,8 +155,38 @@ export default function Questionnaire() {
         </div>
       )}
 
-      {/* STEP 2 – DAYS PER WEEK */}
+      {/* Setp 2 - Experience */}
+
       {step === 2 && (
+        <div className="card step-card">
+          <h1>What is your fitness experience level?</h1>
+          <div className="radio-group">
+            {[
+              'Beginner - New to working out',
+              'Intermediate - 1-2 years experience',
+              'Advanced - 3+ years experience',
+              'Athelete - Professional Level',
+            ].map((goal) => (
+              <label key={goal}>
+                <input
+                  type="radio"
+                  value={goal}
+                  checked={experienceText === goal}
+                  onChange={(e) => setExperienceText(e.target.value)}
+                />
+                {goal}
+              </label>
+            ))}
+          </div>
+          <div>
+            <Button onClick={() => setStep(step - 1)} label="Previous" />
+            <Button onClick={() => setStep(step + 1)} label="Next" />
+          </div>
+        </div>
+      )}
+
+      {/* STEP 3 – DAYS PER WEEK */}
+      {step === 3 && (
         <div className="card step-card">
           <h1>How many days do you want to train?</h1>
           <div className="radio-group">
@@ -167,12 +209,42 @@ export default function Questionnaire() {
         </div>
       )}
 
-      {/* STEP 3 – TRAINING LOCATION */}
-      {step === 3 && (
+      {/* STEP 4 – Minutes */}
+      {step === 4 && (
+        <div className="card step-card">
+          <h1>How many minutes do you want to train?</h1>
+          <div className="radio-group">
+            {[30, 45, 60, 90].map((d) => (
+              <label key={d}>
+                <input
+                  type="radio"
+                  value={d}
+                  checked={minutesText === d}
+                  onChange={(e) => setMintuesText(Number(e.target.value))}
+                />
+                {d === 90 ? '90+ minutes' : `${d} minutes`}
+              </label>
+            ))}
+          </div>
+
+          <div>
+            <Button onClick={() => setStep(step - 1)} label="Previous" />
+            <Button onClick={() => setStep(step + 1)} label="Next" />
+          </div>
+        </div>
+      )}
+
+      {/* STEP 5 – TRAINING LOCATION */}
+      {step === 5 && (
         <div className="card step-card">
           <h1>Where are you training?</h1>
           <div className="radio-group">
-            {['Home', 'Gym', 'Outside'].map((loc) => (
+            {[
+              'Gym with equipment',
+              'Home with minimal equipment',
+              'Outdoor activities',
+              'Mixed / Flexible',
+            ].map((loc) => (
               <label key={loc}>
                 <input
                   type="radio"
@@ -199,7 +271,13 @@ export default function Questionnaire() {
             <strong>Goal:</strong> {goalText}
           </p>
           <p>
+            <strong>Experience:</strong> {experienceText}
+          </p>
+          <p>
             <strong>Days per week:</strong> {daysText}
+          </p>
+          <p>
+            <strong>Minutes per Session:</strong> {minutesText}
           </p>
           <p>
             <strong>Training location:</strong> {trainText}
