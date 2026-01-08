@@ -464,9 +464,10 @@ hr {
 
 .blur-btn {
   z-index: 999999;
-  width: 220px;
-  height: 70px;
+  width: 420px;
+  height: 170px;
   background-color: rgb(41, 208, 238);
+  font-size: 50px;
 }
 
 .blurred-text {
@@ -482,6 +483,7 @@ hr {
   align-items: center;
   top: 10%;
   left: 5%;
+  width: 90%;
 }
 
 /* sign up and login  */

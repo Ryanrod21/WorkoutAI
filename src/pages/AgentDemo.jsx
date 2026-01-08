@@ -125,7 +125,7 @@ export default function AgentDemo() {
         return (
           <div
             key={index}
-            className={`plan-card
+            className={`plan-card 
             ${pickedIndex === index ? 'picked' : ''}
             ${expandedIndex === index ? 'expanded' : ''}`}
             onClick={() => {

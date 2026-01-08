@@ -52,7 +52,7 @@ export default function DemoSelection() {
       <h2 className="section-title">Your Selected Workout</h2>
       <hr />
 
-      <div className="plan-card picked" onClick={() => setExpanded(!expanded)}>
+      <div className="plan-card picked" style={{transform: 'none'}} onClick={() => setExpanded(!expanded)}>
         <div className="plan-header">
           <div className="icon-small-div picked">
             {Icon && <Icon className="icon-small picked" />}
