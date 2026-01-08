@@ -38,7 +38,7 @@ function Navigation() {
   return (
     <div className="nav-container">
       <h1>
-        <a href="/">Workout AI Coach</a>
+        <a href="/">IronPath</a>
       </h1>
 
       {session && (
