@@ -49,9 +49,8 @@ export default function DemoSelection() {
         </p>
       </section>
 
-      <hr />
-
       <h2 className="section-title">Your Selected Workout</h2>
+      <hr />
 
       <div className="plan-card picked" onClick={() => setExpanded(!expanded)}>
         <div className="plan-header">
@@ -86,14 +85,37 @@ export default function DemoSelection() {
         </div>
         {expanded && (
           <div className="blur-card">
-            <Button label={'Sign Up Now'} onClick={handleSignIn} />
-            <div className="test">
-              <p className="blurred-text">This Random Text</p>
-              <p className="blurred-text">This is a random text but longer </p>
-              <p className="blurred-text">Somethign tsoadfkas </p>
-              <p className="blurred-text">This Random Texasdf afdasf asfat</p>
+            <Button
+              className="blur-btn"
+              label={'Sign Up Now To Unlock more'}
+              onClick={handleSignIn}
+            />
+            <div className="blur-div">
+              <h1 className="blurred-text">
+                Day 1: Upper Body Strength Training
+              </h1>
+
               <p className="blurred-text">
-                This Random Texasd asf dasf asf asft
+                Bench Press - 4 sets of 8 reps. Focus on controlled movement,
+                keeping your feet planted and your core engaged throughout each
+                rep.
+              </p>
+
+              <p className="blurred-text">
+                Pull-Ups - 3 sets of 10 reps. Use a full range of motion,
+                squeezing your back muscles at the top and lowering yourself
+                slowly.
+              </p>
+
+              <p className="blurred-text">
+                Shoulder Press - 3 sets of 12 reps. Maintain an upright posture
+                and avoid locking your elbows at the top of the movement.
+              </p>
+
+              <p className="blurred-text">
+                Bicep Curls - 3 sets of 15 reps. Keep your elbows close to your
+                sides and focus on slow, controlled curls for maximum muscle
+                activation.
               </p>
             </div>
           </div>

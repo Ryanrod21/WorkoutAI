@@ -60,23 +60,11 @@ export default function App() {
     );
   }
 
-  // 4️⃣ Render UI for logged-in user without data
-  if (user && !hasWorkout) {
-    return (
-      <div className="app-container">
-        <h1>Hello, {user.user_metadata.full_name}!</h1>
-        <p>Ready to start your first AI workout?</p>
-        <Button label="Start Workout" onClick={() => navigate('/starting')} />
-
-        <Button label="Log Out" onClick={() => logoutUser} />
-      </div>
-    );
-  }
-
-  // 5️⃣ Default UI for not logged-in users
   return (
     <div className="app-container">
       <BackgroundEffect />
+
+      {/* 🔥 Main Homepage Content (everyone sees this) */}
       <div className="dumbbell-div">
         <Dumbbell className="dumbbell icon-primary" />
       </div>
@@ -84,24 +72,24 @@ export default function App() {
       <h1>Transform Your Fitness Journey</h1>
       <h2>
         Get a personalized workout plan designed specifically for your goals,
-        <br></br>
+        <br />
         experience level, and lifestyle. Start your transformation today.
       </h2>
 
       <div className="homecard-container">
         <HomeCard
-          label={'Tailored plans for your specific fitness objectives'}
-          title={'Goal-Driven'}
+          label="Tailored plans for your specific fitness objectives"
+          title="Goal-Driven"
           icon={Target}
         />
         <HomeCard
-          label={'Plans that evolve with your progess'}
-          title={'Adaptive Training'}
+          label="Plans that evolve with your progress"
+          title="Adaptive Training"
           icon={Zap}
         />
         <HomeCard
-          label={'Professional coaching at your finger tips'}
-          title={'Expert Guidance'}
+          label="Professional coaching at your fingertips"
+          title="Expert Guidance"
           icon={Dumbbell}
         />
       </div>
@@ -110,27 +98,56 @@ export default function App() {
         <Button
           className="free-btn"
           onClick={() => navigate('/demo')}
-          label={'Watch the Demo to see how everything works !'}
+          label="Watch the Demo to see how everything works!"
         />
       </div>
 
-      <div className="section">
-        <h2>Create an Account or Sign in ! </h2>
-        <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-          <Button
-            className="log-in-sign-up-btn"
-            label="Sign Up"
-            onClick={() => navigate('/sign-up')}
-          />
-          <Button
-            className="log-in-sign-up-btn"
-            label="Login"
-            onClick={() => navigate('/login')}
-          />
+      {!user && (
+        <div className="section">
+          <h2>Create an Account or Sign in!</h2>
+          <div
+            style={{
+              display: 'flex',
+              gap: '1rem',
+              justifyContent: 'center',
+            }}
+          >
+            <Button
+              className="log-in-sign-up-btn"
+              label="Sign Up"
+              onClick={() => navigate('/sign-up')}
+            />
+            <Button
+              className="log-in-sign-up-btn"
+              label="Login"
+              onClick={() => navigate('/login')}
+            />
+          </div>
         </div>
-      </div>
+      )}
+
+      {user && !hasWorkout && (
+        <div className="welcome-section">
+          <h1>Hello, {user.user_metadata?.full_name}!</h1>
+          <p>Ready to start your first AI workout?</p>
+
+          <div className="welcome-actions">
+            <Button
+              className="log-in-sign-up-btn"
+              label="Start Workout"
+              onClick={() => navigate('/questionnaire')}
+            />
+            {/* <Button
+              className="log-in-sign-up-btn"
+              label="Log Out"
+              onClick={logoutUser} // ✅ fixed
+            /> */}
+          </div>
+        </div>
+      )}
+
       <div style={{ marginTop: '30px', color: 'white' }}>
-        <p>Get your workout plans in minutes !</p>
+        <p>Get your workout plans in minutes!</p>
       </div>
     </div>
   );

@@ -20,7 +20,7 @@ export default function SignUp() {
   };
 
   return (
-    <div className="section">
+    <div className="form-section">
       <h2>Sign Up</h2>
 
       {/* Name Input */}

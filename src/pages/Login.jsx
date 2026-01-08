@@ -47,31 +47,32 @@ export default function Login() {
   };
 
   return (
-    <form
-      onSubmit={handleLogin}
-      style={{ padding: 40, maxWidth: 400, margin: '0 auto' }}
-    >
-      <h2>Login</h2>
+    <form onSubmit={handleLogin} className="form-section">
+      <h2 className="login-title">Login</h2>
+
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        style={{ display: 'block', marginBottom: 12, width: '100%' }}
+        className="login-input"
       />
+
       <input
         type="password"
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         required
-        style={{ display: 'block', marginBottom: 12, width: '100%' }}
+        className="login-input"
       />
-      <button type="submit" style={{ padding: 10, width: '100%' }}>
+
+      <button type="submit" className="login-button">
         Login
       </button>
-      {message && <p>{message}</p>}
+
+      {message && <p className="login-message">{message}</p>}
     </form>
   );
 }

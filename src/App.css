@@ -163,3 +163,16 @@ input {
 .section-results p {
   color: white;
 }
+
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.welcome-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}

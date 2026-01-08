@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import Button from '../components/button';
 import './page.css';
+import ProgressBar from '../components/UI/ProgressBar';
+import BackgroundEffect from '../components/UI/BackgroundEffect';
 
 export default function Questionnaire() {
   const [step, setStep] = useState(0);
@@ -10,7 +12,7 @@ export default function Questionnaire() {
   const [daysText, setDaysText] = useState(null);
   const [trainText, setTrainText] = useState('');
   const [experienceText, setExperienceText] = useState('');
-  const [minutesText, setMintuesText] = useState('');
+  const [minutesText, setMintuesText] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -98,12 +100,14 @@ export default function Questionnaire() {
     }
   };
 
+  const TOTAL_QUESTIONS = 7; // change to your actual number
+
+  const progressPercent =
+    step === 0 ? 0 : Math.round((step / TOTAL_QUESTIONS) * 100);
+
   return (
     <div className="landing-page">
-      <div class="bg-wrapper">
-        <div class="glow glow-1"></div>
-        <div class="glow glow-2"></div>
-      </div>
+      <BackgroundEffect />
 
       {loading && (
         <div className="loading-screen">
@@ -117,10 +121,10 @@ export default function Questionnaire() {
       {/* STEP 0 – WELCOME */}
       {step === 0 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h1>Let's Get Started</h1>
           <p>Welcome to your AI Workout Coach experience!</p>
           <div style={{ display: 'flex', gap: '1rem' }}>
-            <Button onClick={() => navigate('/')} label="Go Back to App" />
             <Button onClick={() => setStep(step + 1)} label="Get Started" />
           </div>
         </div>
@@ -129,6 +133,7 @@ export default function Questionnaire() {
       {/* STEP 1 – GOAL SELECTION */}
       {step === 1 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h1>Select your fitness goal</h1>
           <div className="radio-group">
             {[
@@ -159,6 +164,7 @@ export default function Questionnaire() {
 
       {step === 2 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h1>What is your fitness experience level?</h1>
           <div className="radio-group">
             {[
@@ -166,15 +172,15 @@ export default function Questionnaire() {
               'Intermediate - 1-2 years experience',
               'Advanced - 3+ years experience',
               'Athelete - Professional Level',
-            ].map((goal) => (
-              <label key={goal}>
+            ].map((experience) => (
+              <label key={experience}>
                 <input
                   type="radio"
-                  value={goal}
-                  checked={experienceText === goal}
+                  value={experience}
+                  checked={experienceText === experience}
                   onChange={(e) => setExperienceText(e.target.value)}
                 />
-                {goal}
+                {experience}
               </label>
             ))}
           </div>
@@ -188,6 +194,7 @@ export default function Questionnaire() {
       {/* STEP 3 – DAYS PER WEEK */}
       {step === 3 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h1>How many days do you want to train?</h1>
           <div className="radio-group">
             {[3, 4, 5, 6].map((d) => (
@@ -212,6 +219,7 @@ export default function Questionnaire() {
       {/* STEP 4 – Minutes */}
       {step === 4 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h1>How many minutes do you want to train?</h1>
           <div className="radio-group">
             {[30, 45, 60, 90].map((d) => (
@@ -237,6 +245,7 @@ export default function Questionnaire() {
       {/* STEP 5 – TRAINING LOCATION */}
       {step === 5 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h1>Where are you training?</h1>
           <div className="radio-group">
             {[
@@ -263,9 +272,10 @@ export default function Questionnaire() {
         </div>
       )}
 
-      {/* STEP 4 – CONFIRMATION */}
-      {step === 4 && (
+      {/* STEP 6 – CONFIRMATION */}
+      {step === 6 && (
         <div className="card step-card">
+          <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h2>Confirm Your Selections</h2>
           <p>
             <strong>Goal:</strong> {goalText}
