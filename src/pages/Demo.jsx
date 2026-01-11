@@ -156,7 +156,7 @@ export default function Demo() {
     <div className="landing-page">
       <BackgroundEffect />
       <div className="card step-card">
-        {/* {slideIndex > 0 && (
+        {slideIndex > 0 && (
           <div className="progress-wrapper">
             <div className="progress-bar">
               <div
@@ -166,9 +166,7 @@ export default function Demo() {
             </div>
             <span className="progress-text">{progressPercent}%</span>
           </div>
-        )} */}
-
-        <ProgressBar progressPercent={progressPercent} show={slideIndex > 0} />
+        )}
 
         {slide.dialogue && (
           <div

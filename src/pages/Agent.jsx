@@ -109,6 +109,9 @@ export default function Agent() {
     }
   };
 
+  console.log(state);
+  console.log(state.plans);
+
   return (
     <div style={{ padding: 40, maxWidth: 900, margin: '0 auto' }}>
       <h1 style={{ color: 'white' }}>Your Workout Summary</h1>
