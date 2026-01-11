@@ -4,7 +4,6 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../components/button';
 import BackgroundEffect from '../components/UI/BackgroundEffect';
-import ProgressBar from '../components/UI/ProgressBar';
 
 const slides = [
   {

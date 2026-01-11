@@ -43,7 +43,7 @@ export default function App() {
       if (workouts && workouts.length > 0) {
         setHasWorkout(true);
         // 3️⃣ If user has data, redirect to results page with the latest workout
-        navigate('/results', { state: workouts[0] });
+        // navigate('/results', { state: workouts[0] });
       }
 
       setLoading(false);
@@ -126,23 +126,32 @@ export default function App() {
         </div>
       )}
 
-      {user && !hasWorkout && (
+      {user && (
         <div className="welcome-section">
           <h1>Hello, {user.user_metadata?.full_name}!</h1>
-          <p>Ready to start your first AI workout?</p>
+          <p>Ready to start your AI workout?</p>
 
           <div className="welcome-actions">
-            <Button
-              className="log-in-sign-up-btn"
-              label="Start Workout"
-              onClick={() => navigate('/questionnaire')}
-            />
-            {/* <Button
-              className="log-in-sign-up-btn"
-              label="Log Out"
-              onClick={logoutUser} // ✅ fixed
-            /> */}
+            {!hasWorkout && (
+              <Button
+                className="log-in-sign-up-btn"
+                label="Start Workout"
+                onClick={() => navigate('/questionnaire')}
+              />
+            )}
+
+            {/* You can also show other buttons here if needed */}
           </div>
+          {hasWorkout && (
+            <div className="welcome-actions">
+              <p>You already have a workout plan!</p>
+              <Button
+                className="log-in-sign-up-btn"
+                label="Your Workout"
+                onClick={() => navigate('/results')}
+              />
+            </div>
+          )}
         </div>
       )}
 

@@ -155,7 +155,11 @@ export default function Questionnaire() {
           </div>
           <div>
             <Button onClick={() => setStep(step - 1)} label="Previous" />
-            <Button onClick={() => setStep(step + 1)} label="Next" />
+            <Button
+              onClick={() => setStep(step + 1)}
+              label="Next"
+              disabled={!goalText}
+            />
           </div>
         </div>
       )}
@@ -186,7 +190,11 @@ export default function Questionnaire() {
           </div>
           <div>
             <Button onClick={() => setStep(step - 1)} label="Previous" />
-            <Button onClick={() => setStep(step + 1)} label="Next" />
+            <Button
+              onClick={() => setStep(step + 1)}
+              label="Next"
+              disabled={!experienceText}
+            />
           </div>
         </div>
       )}
@@ -211,7 +219,11 @@ export default function Questionnaire() {
           </div>
           <div>
             <Button onClick={() => setStep(step - 1)} label="Previous" />
-            <Button onClick={() => setStep(step + 1)} label="Next" />
+            <Button
+              onClick={() => setStep(step + 1)}
+              label="Next"
+              disabled={!daysText}
+            />
           </div>
         </div>
       )}
@@ -237,7 +249,11 @@ export default function Questionnaire() {
 
           <div>
             <Button onClick={() => setStep(step - 1)} label="Previous" />
-            <Button onClick={() => setStep(step + 1)} label="Next" />
+            <Button
+              onClick={() => setStep(step + 1)}
+              label="Next"
+              disabled={!minutesText}
+            />
           </div>
         </div>
       )}
@@ -267,7 +283,11 @@ export default function Questionnaire() {
           </div>
           <div>
             <Button onClick={() => setStep(step - 1)} label="Previous" />
-            <Button onClick={() => setStep(step + 1)} label="Next" />
+            <Button
+              onClick={() => setStep(step + 1)}
+              label="Next"
+              disabled={!trainText}
+            />
           </div>
         </div>
       )}

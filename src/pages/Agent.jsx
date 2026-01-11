@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabaseClient.js';
+import { Dumbbell, Zap, Trophy } from 'lucide-react';
 
 export default function Agent() {
   const [expandedIndex, setExpandedIndex] = useState(null);
@@ -109,8 +110,14 @@ export default function Agent() {
     }
   };
 
+  const categoryIcons = {
+    'Strength Builder': Dumbbell,
+    'Endurance Elite': Zap,
+    'Athletic Performance': Trophy,
+  };
+
   console.log(state);
-  console.log(state.plans);
+  console.log(state.plans[0].plans);
 
   return (
     <div style={{ padding: 40, maxWidth: 900, margin: '0 auto' }}>
@@ -131,66 +138,65 @@ export default function Agent() {
 
       <hr />
 
-      <h2 style={{ color: 'white' }}>AI Suggested Workout Plans</h2>
+      {state.plans[0].plans.map((plan, index) => {
+        const CategoryIcon = categoryIcons[plan.category]; // just use it here
 
-      {state.plans.map((plan, index) => (
-        <div
-          key={index}
-          onClick={() => handleExpand(index)}
-          style={{
-            border: '2px solid',
-            borderColor:
-              pickedIndex === index
-                ? '#28a745'
-                : expandedIndex === index
-                ? 'white'
-                : 'white',
-            padding: 20,
-            marginBottom: 20,
-            borderRadius: 8,
-            backgroundColor:
-              pickedIndex === index
-                ? '#e6ffed'
-                : expandedIndex === index
-                ? '#76bdffff'
-                : '#76bdffff',
-            cursor: 'pointer',
-            transition: 'all 0.3s ease',
-          }}
-        >
-          <h3>Plan {index + 1}</h3>
-          <p style={{ color: 'black' }}>
-            <strong>Summary:</strong> {plan.plan_summary}
-          </p>
-
-          {expandedIndex === index && (
-            <div style={{ marginTop: 12 }}>
-              <button
-                disabled={saving}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handlePick(index);
-                }}
-                style={{
-                  backgroundColor: '#28a745',
-                  color: 'white',
-                  border: 'none',
-                  padding: '8px 14px',
-                  borderRadius: 4,
-                  cursor: 'pointer',
-                  opacity: saving ? 0.7 : 1,
-                }}
+        return (
+          <div
+            key={index}
+            className={`plan-card 
+            ${pickedIndex === index ? 'picked' : ''} 
+            ${expandedIndex === index ? 'expanded' : ''}`}
+            onClick={() => {
+              handleExpand(index);
+            }}
+          >
+            <div className="plan-header">
+              <div
+                className={`icon-small-div ${
+                  pickedIndex === index ? 'picked' : ''
+                }`}
               >
-                {saving
-                  ? 'Saving...'
-                  : pickedIndex === index
-                  ? 'Open Workout'
-                  : 'I pick this workout'}
-              </button>
+                <CategoryIcon
+                  className={`icon-small ${
+                    pickedIndex === index ? 'picked' : ''
+                  }`}
+                />
+              </div>
+
+              <div className="plan-title">
+                <h3>Plan {index + 1}</h3>
+                <p>
+                  <strong>Summary:</strong> {plan.plan_summary}
+                </p>
+
+                {expandedIndex === index && Array.isArray(plan.expect) && (
+                  <div className="plan-expanded">
+                    <ul className="custom-list">
+                      {plan.expect.map((ex, i) => (
+                        <li key={i}>
+                          <CategoryIcon className="icon-bullet" />
+                          <span>{ex}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
-      ))}
+          </div>
+        );
+      })}
+
+      <div className="plan-action">
+        <button
+          className="pick-button"
+          disabled={pickedIndex === null || saving}
+          onClick={() => handlePick(pickedIndex)}
+        >
+          {pickedIndex === null ? 'Select a workout' : 'Confirm workout'}
+        </button>
+      </div>
     </div>
   );
 }
