@@ -3,8 +3,8 @@ import { supabase } from '../lib/supabaseClient';
 import BackgroundEffect from '../components/UI/BackgroundEffect';
 import ProgressBar from '../components/UI/ProgressBar';
 import Button from '../components/button';
-import EditableField from '../components/BackendFunction/EditTableField';
-import LocalEditableField from '../components/BackendFunction/LocalEditField';
+import EditTableField from '../components/BackendFunction/EditTableField';
+import LocalEditTableField from '../components/BackendFunction/LocalEditField';
 
 export default function Progression() {
   const [q1, setQ1] = useState('');
@@ -62,23 +62,33 @@ export default function Progression() {
     // Build payload
     const payload = {
       user_id: user.id,
-      days: data.days,
-      goal: data.goal,
-      experience: data.experience,
-      minutes: data.minutes,
-      location: data.location,
-      selected_plan: data.selected_plan, // or whatever you want to send
-      ai_questions: {
-        q1,
-        q2,
-        q3,
-        q4,
-        q5,
+
+      // 🔹 REQUIRED by backend
+      previous_plan: data.selected_plan,
+
+      // 🔹 MUST match WorkoutPreference / Input model
+      preference: {
+        days: data.days,
+        goal: data.goal,
+        location: data.location, // IMPORTANT: backend expects "train"
+        experience: data.experience,
+        minutes: data.minutes,
+        week: 1, // or dynamic week number later
       },
+
+      // 🔹 Progression answers
+      difficulty: q1,
+      soreness: q2,
+      completed: q3,
+      progression: q4,
+      feedback: q5,
+
+      // 🔹 REQUIRED boolean
+      day_status: true,
     };
 
     try {
-      const res = await fetch('https://your-backend-url/progression', {
+      const res = await fetch('https://gymai-u2km.onrender.com/progress', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
@@ -290,57 +300,72 @@ export default function Progression() {
           <ProgressBar progressPercent={progressPercent} show={step > 0} />
           <h2>Confirm Your Selections or Change your selection! </h2>
           <div>
-            <EditableField
+            <EditTableField
               label="Days per Week"
               value={data.days}
               userId={data.user_id}
               column="days"
+              onChange={(newValue) =>
+                setData((prev) => ({ ...prev, days: newValue }))
+              }
             />
-            <EditableField
+            <EditTableField
               label="Goal"
               value={data.goal}
               userId={data.user_id}
               column="goal"
+              onChange={(newValue) =>
+                setData((prev) => ({ ...prev, goal: newValue }))
+              }
             />
-            <EditableField
+            <EditTableField
               label="Experience"
               value={data.experience}
               userId={data.user_id}
               column="experience"
+              onChange={(newValue) =>
+                setData((prev) => ({ ...prev, experience: newValue }))
+              }
             />
-            <EditableField
+            <EditTableField
               label="Minutes per Session"
               value={data.minutes}
               userId={data.user_id}
               column="minutes"
+              onChange={(newValue) =>
+                setData((prev) => ({ ...prev, minutes: newValue }))
+              }
             />
-            <EditableField
+            <EditTableField
               label="Training Location"
               value={data.location}
               userId={data.user_id}
               column="location"
+              onChange={(newValue) =>
+                setData((prev) => ({ ...prev, location: newValue }))
+              }
             />
-            <LocalEditableField
+            <LocalEditTableField
               label="How challenging was this week's workout?"
               value={q1}
               onSave={setQ1}
               options={['Too Easy', 'Easy', 'Just Right', 'Hard', 'Too Hard']}
             />
-            <LocalEditableField
+            <LocalEditTableField
               label="How sore were you getting?"
               value={q2}
               onSave={setQ2}
               options={['Not sore', 'Kinda Sore', 'Very Sore']}
             />
 
-            <LocalEditableField
+            <LocalEditTableField
               label="Did this week's workouts help your goals?"
               value={q4}
               onSave={setQ4}
               options={['Yes', 'Somewhat', 'No']}
             />
 
-            <LocalEditableField label="Comments" value={q5} onSave={setQ5} />
+            <LocalEditTableField label="Comments" value={q5} onSave={setQ5} />
           </div>
 
           <p>

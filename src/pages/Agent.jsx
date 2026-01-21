@@ -12,14 +12,20 @@ export default function Agent() {
   const [gymRow, setGymRow] = useState(null);
   const [workouts, setWorkouts] = useState([]);
   const [userName, setUserName] = useState('');
+  const [loading, setLoading] = useState(true);
 
   // 🔹 Fetch user + workout
   useEffect(() => {
     const fetchUserAndWorkout = async () => {
+      setLoading(true);
+
       const {
         data: { user },
       } = await supabase.auth.getUser();
-      if (!user) return;
+      if (!user) {
+        setLoading(false);
+        return;
+      }
 
       if (user.user_metadata?.full_name) {
         setUserName(user.user_metadata.full_name);
@@ -34,26 +40,43 @@ export default function Agent() {
 
       if (error) {
         console.error('Failed to fetch workout:', error);
+        setLoading(false);
         return;
       }
 
-      if (!data || data.length === 0) return;
+      if (!data || data.length === 0) {
+        setLoading(false);
+        return;
+      }
 
       const row = data[0];
       setGymRow(row);
 
       if (row?.selected_plan) {
         navigate('/selected-workout');
+        return;
       }
 
-      // 🔑 NORMALIZE WORKOUTS
       const extractedWorkouts = row.plans?.[0]?.plans ?? [];
       setWorkouts(extractedWorkouts);
+
+      setLoading(false);
     };
 
     fetchUserAndWorkout();
   }, []);
 
+  // 🔹 1. Loading screen
+  if (loading) {
+    return (
+      <div className="loading-screen">
+        <div className="loader"></div>
+        <p>Loading your workout...</p>
+      </div>
+    );
+  }
+
+  // 🔹 2. No workout exists
   if (!gymRow || workouts.length === 0) {
     return (
       <div style={{ padding: 40 }}>

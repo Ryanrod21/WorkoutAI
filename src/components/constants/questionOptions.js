@@ -8,10 +8,17 @@ export const QUESTION_OPTIONS = {
     'Advanced - 3+ years experience',
     'Athlete - Professional Level',
   ],
-  train: [
+  location: [
     'Gym with equipment',
     'Home with minimal equipment',
     'Outdoor activities',
     'Mixed / Flexible',
   ],
+};
+
+export const PROGRESS_OPTION = {
+  difficulty: ['Too Easy', 'Easy', 'Just Right', 'Hard', 'Too Hard'],
+  soreness: ['Not sore', 'Kinda sore', 'Very sore'],
+  completion: ['Yes', 'Partially', 'No'],
+  progressValue: ['Yes', 'Somewhat', 'No'],
 };

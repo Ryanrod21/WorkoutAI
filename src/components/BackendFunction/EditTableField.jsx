@@ -3,7 +3,13 @@ import { supabase } from '../../lib/supabaseClient';
 import Button from '../button';
 import { QUESTION_OPTIONS } from '../constants/questionOptions'; // ✅ import options
 
-export default function EditableField({ label, value, userId, column }) {
+export default function EditTableField({
+  label,
+  value,
+  userId,
+  column,
+  onChange,
+}) {
   const [editing, setEditing] = useState(false);
   const [tempValue, setTempValue] = useState(value);
   const [saving, setSaving] = useState(false);
@@ -17,6 +23,8 @@ export default function EditableField({ label, value, userId, column }) {
         .eq('user_id', userId);
 
       if (error) throw error;
+
+      if (onChange) onChange(tempValue);
 
       setEditing(false);
     } catch (err) {

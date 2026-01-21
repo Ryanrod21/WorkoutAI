@@ -57,7 +57,7 @@ export default function Questionnaire() {
       let fullPayload = {
         goal: goalText,
         days: daysText,
-        train: trainText,
+        location: trainText,
         minutes: minutesText,
         experience: experienceText,
         plans: aiResults,
