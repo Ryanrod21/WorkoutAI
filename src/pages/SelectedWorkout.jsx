@@ -244,7 +244,7 @@ export default function SelectedWorkout() {
       <div className="next-week-wrapper">
         <Button
           label="Next Week Workout"
-          disabled={timeRemaining > 0 || completedDays < totalDays}
+          // disabled={timeRemaining > 0 || completedDays < totalDays}
           onClick={handleNextWeek}
         />
         {(timeRemaining > 0 || completedDays < totalDays) && (

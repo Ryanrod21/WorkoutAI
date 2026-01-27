@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient.js';
 import { Dumbbell, Zap, Trophy } from 'lucide-react';
 
@@ -13,6 +13,8 @@ export default function Agent() {
   const [workouts, setWorkouts] = useState([]);
   const [userName, setUserName] = useState('');
   const [loading, setLoading] = useState(true);
+
+  const plansRef = useRef(null);
 
   // 🔹 Fetch user + workout
   useEffect(() => {
@@ -64,6 +66,21 @@ export default function Agent() {
     };
 
     fetchUserAndWorkout();
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (plansRef.current && !plansRef.current.contains(e.target)) {
+        setExpandedIndex(null);
+        setTempPickedIndex(null);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
   }, []);
 
   // 🔹 1. Loading screen
@@ -164,54 +181,59 @@ export default function Agent() {
 
       <hr />
 
-      {workouts.map((plan, index) => {
-        const CategoryIcon = categoryIcons[plan.category];
+      <div ref={plansRef}>
+        {workouts.map((plan, index) => {
+          const CategoryIcon = categoryIcons[plan.category];
 
-        return (
-          <div
-            key={index}
-            className={`plan-card
+          return (
+            <div
+              key={index}
+              className={`plan-card
               ${tempPickedIndex === index ? 'picked-preview' : ''}
               ${expandedIndex === index ? 'expanded' : ''}
             `}
-            onClick={() => handleExpandAndPick(index)}
-          >
-            <div className="plan-header">
-              <div
-                className={`icon-small-div ${tempPickedIndex === index ? 'picked' : ''}`}
-              >
-                <CategoryIcon className="icon-small" />
-              </div>
+              onClick={() => handleExpandAndPick(index)}
+            >
+              <div className="plan-header">
+                <div
+                  className={`icon-small-div ${tempPickedIndex === index ? 'picked' : ''}`}
+                >
+                  <CategoryIcon className="icon-small" />
+                </div>
 
-              <div className="plan-title">
-                <h3>Plan {index + 1}</h3>
-                <p>
-                  <strong>Summary:</strong> {plan.plan_summary}
-                </p>
+                <div className="plan-title">
+                  <h3>Plan {index + 1}</h3>
+                  <p style={{ color: 'white' }}>
+                    <strong>Summary:</strong> {plan.plan_summary}
+                  </p>
 
-                {expandedIndex === index && Array.isArray(plan.expect) && (
-                  <div className="plan-expanded">
-                    <ul className="custom-list">
-                      {plan.expect.map((ex, i) => (
-                        <li key={i}>
-                          <CategoryIcon className="icon-bullet" />
-                          <span>{ex}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                  {expandedIndex === index && Array.isArray(plan.expect) && (
+                    <div className="plan-expanded">
+                      <ul className="custom-list">
+                        {plan.expect.map((ex, i) => (
+                          <li key={i}>
+                            <CategoryIcon className="icon-bullet" />
+                            <span style={{ color: 'white' }}>{ex}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
 
       <div className="plan-action">
         <button
           className="pick-button"
           disabled={tempPickedIndex === null || saving}
-          onClick={handleConfirmPick}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleConfirmPick();
+          }}
         >
           {saving ? 'Saving...' : 'Confirm workout'}
         </button>

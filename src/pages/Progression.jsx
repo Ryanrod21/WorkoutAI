@@ -61,17 +61,12 @@ export default function Progression() {
       return;
     }
 
-    // Ensure we have the user's gym row data loaded
-    if (!data) {
+    if (!data || !data.selected_plan) {
       alert('User data not loaded yet. Please wait a moment and try again.');
       return;
     }
 
-    // setLoading(true);
-
-    // Build payload
-    // Backend expects `day_status` to be a boolean. Compute a boolean
-    // from the stored per-day status object (true if all days finished).
+    // Compute day_status as a boolean (all days completed = true)
     const computedDayStatus =
       typeof data.day_status === 'boolean'
         ? data.day_status
@@ -79,14 +74,15 @@ export default function Progression() {
           ? Object.values(data.day_status).every((v) => v === true)
           : true;
 
+    // 🔹 Wrap previous_plan correctly for backend
+    const previousPlanPayload = {
+      week: 1, // or use data.selected_plan.week if available
+      plans: [data.selected_plan], // wrap in an array
+    };
+
     const payload = {
       user_id: user.id,
-
-      // 🔹 REQUIRED by backend
-      previous_plan: data.selected_plan,
-
-      // 🔹 MUST match WorkoutPreference / Input model
-      // backend AI expects `train` (not `location`), so map accordingly
+      previous_plan: previousPlanPayload,
       preference: {
         days: data.days,
         goal: data.goal,
@@ -95,17 +91,17 @@ export default function Progression() {
         minutes: data.minutes,
         week: 1,
       },
-
-      // 🔹 Progression answers
       difficulty: q1,
       soreness: q2,
       completed: q3,
       progression: q4,
       feedback: q5,
-
-      // 🔹 send boolean day_status (backend requires boolean)
       day_status: computedDayStatus,
     };
+
+    console.log('Payload to backend:', payload);
+    console.log('previousPlanPayload:', previousPlanPayload);
+    console.log('data.selected_plan:', data.selected_plan);
 
     try {
       const res = await fetch('https://gymai-u2km.onrender.com/progress', {
@@ -115,7 +111,6 @@ export default function Progression() {
       });
 
       const result = await res.json();
-      // console.log(result);
 
       if (!res.ok) {
         console.error('Backend error:', result);
@@ -123,8 +118,8 @@ export default function Progression() {
         return;
       }
 
+      console.log('Backend response:', result); // ✅ See new plans here
       alert('Progress saved successfully!');
-      // Optionally redirect back to results or another page
     } catch (err) {
       console.error(err);
       alert('Error connecting to server.');
