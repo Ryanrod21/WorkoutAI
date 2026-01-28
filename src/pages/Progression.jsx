@@ -66,13 +66,12 @@ export default function Progression() {
       return;
     }
 
-    // Compute day_status as a boolean (all days completed = true)
-    const computedDayStatus =
-      typeof data.day_status === 'boolean'
+    // Convert array or object to a plain dictionary
+    const computedDayStatus = Array.isArray(data.day_status)
+      ? Object.fromEntries(data.day_status.map((v, i) => [i, v]))
+      : typeof data.day_status === 'object'
         ? data.day_status
-        : data.day_status && typeof data.day_status === 'object'
-          ? Object.values(data.day_status).every((v) => v === true)
-          : true;
+        : {};
 
     // 🔹 Wrap previous_plan correctly for backend
     const previousPlanPayload = {
@@ -81,8 +80,11 @@ export default function Progression() {
     };
 
     const payload = {
+      type: 'workout_progression', // 👈 THIS is the key
       user_id: user.id,
+
       previous_plan: previousPlanPayload,
+
       preference: {
         days: data.days,
         goal: data.goal,
@@ -91,12 +93,13 @@ export default function Progression() {
         minutes: data.minutes,
         week: 1,
       },
+
       difficulty: q1,
       soreness: q2,
       completed: q3,
       progression: q4,
       feedback: q5,
-      day_status: computedDayStatus,
+      day_status: computedDayStatus || {},
     };
 
     console.log('Payload to backend:', payload);
