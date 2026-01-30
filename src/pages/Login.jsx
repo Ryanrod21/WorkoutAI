@@ -14,10 +14,8 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // 1️⃣ Log in
       const user = await loginUser(email, password);
 
-      // 2️⃣ Fetch user's latest workout
       const { data: workout, error } = await supabase
         .from('gym')
         .select('*')
@@ -27,18 +25,14 @@ export default function Login() {
         .single();
 
       if (error && error.code !== 'PGRST116') {
-        // PGRST116 = no rows found, ignore this
         throw error;
       }
 
       if (workout) {
-        // 3️⃣ Save workout data to sessionStorage
         sessionStorage.setItem('workoutData', JSON.stringify(workout));
 
-        // 4️⃣ Go straight to results page
         navigate('/results', { state: workout });
       } else {
-        // No workout found → go to landing page to create one
         navigate('/landing');
       }
     } catch (err) {
@@ -46,13 +40,8 @@ export default function Login() {
     }
   };
 
-  const handleForgotPassword = async () => {
-  const { error } = await resetPassword(email);
-  if (error) {
-    alert(error.message);
-  } else {
-    alert('Password reset email sent!');
-  }
+  const handleForgotPassword = () => {
+    navigate('/email-reset-password');
 };
 
 

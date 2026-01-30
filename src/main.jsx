@@ -13,6 +13,8 @@ import Demo from './pages/Demo';
 import AgentDemo from './pages/AgentDemo';
 import DemoSelection from './pages/DemoSelection';
 import Progressin from './pages/Progression';
+import EmailPasswordReset from './pages/EmailPasswordRest';
+import ResetPassword from './pages/ResetPassword';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -28,6 +30,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Route path="/selected-workout" element={<SelectedWorkout />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<SignUp />} />
+      <Route path="/email-reset-password" element={<EmailPasswordReset />} />
+      <Route path="/password-reset" element={<ResetPassword />} />
     </Routes>
   </BrowserRouter>
 );
