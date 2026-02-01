@@ -122,9 +122,17 @@ export default function Questionnaire() {
       {step === 0 && (
         <div className="card step-card">
           <ProgressBar progressPercent={progressPercent} show={step > 0} />
-          <h1>Let's Get Started</h1>
-          <p>Welcome to your AI Workout Coach experience!</p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              gap: '40px',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <h1>Let's Get Started</h1>
+            <p>Welcome to your AI Workout Coach experience!</p>
             <Button onClick={() => setStep(step + 1)} label="Get Started" />
           </div>
         </div>

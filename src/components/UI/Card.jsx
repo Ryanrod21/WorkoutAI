@@ -1,8 +1,8 @@
 import '../components.css';
 
-export default function HomeCard({ label, title, icon: Icon }) {
+export default function Card({ className, label, title, icon: Icon }) {
   return (
-    <div className="home-card icon-primary">
+    <div className={className}>
       {Icon && <Icon size={32} />}
       <h3>{title}</h3>
       <p>{label}</p>

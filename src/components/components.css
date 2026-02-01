@@ -101,8 +101,8 @@
 }
 
 .home-card {
-  width: 300px;
-  height: 220px;
+  width: 320px;
+  height: 270px;
   padding: 16px;
   background: rgba(0, 0, 0, 0.562);
   border-radius: 12px;
@@ -111,7 +111,9 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 25px;
+  gap: 15px;
+  position: relative;
+  z-index: 99999;
 }
 
 .home-card svg {
@@ -184,4 +186,28 @@
   margin-top: 0.5rem;
   display: flex;
   gap: 0.5rem;
+}
+
+.timeline-container {
+  margin-top: 120px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 230px;
+}
+
+.timeline-line-animated {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 4px;
+  background-color: white; /* blue to see growth */
+  z-index: 0;
+}
+
+.home-card.active {
+  transform: scale(1.05);
+  background-color: black;
+  border: 5px solid rgb(41, 208, 238);
 }

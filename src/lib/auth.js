@@ -23,7 +23,7 @@ export async function loginUser(email, password) {
   return data;
 }
 
-//Forgot password 
+//Forgot password
 
 export const sendPasswordResetEmail = async (email) => {
   return await supabase.auth.resetPasswordForEmail(email, {
@@ -31,13 +31,6 @@ export const sendPasswordResetEmail = async (email) => {
   });
 };
 
-
-//Reset password
-export const resetPassword = async (email) => {
-  return await supabase.auth.resetPasswordForEmail(email, {
-    redirectTo: '/sign-up',
-  });
-};
 // Logout user
 export async function logoutUser() {
   await supabase.auth.signOut();

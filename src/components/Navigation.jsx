@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabaseClient';
 import { logoutUser } from '../lib/auth';
 
@@ -9,10 +9,6 @@ function Navigation() {
   const [session, setSession] = useState(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const showSignUp =
-    location.pathname === '/demo' || location.pathname === '/demo-agent' || location.pathname === '/demo-selection';
 
   useEffect(() => {
     // Get initial session
@@ -35,13 +31,15 @@ function Navigation() {
     navigate('/');
   };
 
+  const user = session?.user;
+
   return (
-    <div className="nav-container"> 
+    <div className="nav-container">
       <h1>
         <a href="/">IronPath</a>
       </h1>
 
-      {session && (
+      {user && (
         <div className="nav-links">
           <h3>
             <a href="/">Home</a>
@@ -52,10 +50,13 @@ function Navigation() {
         </div>
       )}
 
-      {showSignUp && (
+      {!user && (
         <div className="nav-links">
           <h3>
             <a href="/sign-up">Sign Up</a>
+          </h3>
+          <h3>
+            <a href="/login">Log In</a>
           </h3>
         </div>
       )}

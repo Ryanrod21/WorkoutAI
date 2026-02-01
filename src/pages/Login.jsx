@@ -14,13 +14,17 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await loginUser(email, password);
+      const { user } = await loginUser(email, password);
+
+      if (!user?.id) {
+        throw new Error('User not available after login');
+      }
 
       const { data: workout, error } = await supabase
         .from('gym')
         .select('*')
         .eq('user_id', user.id)
-        .order('created_at', { ascending: false }) // latest first
+        .order('created_at', { ascending: false })
         .limit(1)
         .single();
 
@@ -42,8 +46,7 @@ export default function Login() {
 
   const handleForgotPassword = () => {
     navigate('/email-reset-password');
-};
-
+  };
 
   return (
     <form onSubmit={handleLogin} className="form-section">

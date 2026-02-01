@@ -1,12 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './lib/supabaseClient';
-import { logoutUser } from './lib/auth';
 import { Dumbbell, Zap, Target } from 'lucide-react';
 import Button from './components/button';
 import './App.css';
 import HomeCard from './components/UI/Card';
 import BackgroundEffect from './components/UI/BackgroundEffect';
+import LineUI from './components/UI/LineUI';
+
+const cards = [
+  {
+    label: 'Tailored plans for your specific fitness objectives',
+    title: 'Goal-Driven',
+    icon: Target,
+  },
+  {
+    label: 'Plans that evolve with your progress',
+    title: 'Adaptive Training',
+    icon: Zap,
+  },
+  {
+    label: 'Professional coaching at your fingertips',
+    title: 'Expert Guidance',
+    icon: Dumbbell,
+  },
+];
 
 export default function App() {
   const navigate = useNavigate();
@@ -77,22 +95,18 @@ export default function App() {
       </h2>
 
       <div className="homecard-container">
-        <HomeCard
-          label="Tailored plans for your specific fitness objectives"
-          title="Goal-Driven"
-          icon={Target}
-        />
-        <HomeCard
-          label="Plans that evolve with your progress"
-          title="Adaptive Training"
-          icon={Zap}
-        />
-        <HomeCard
-          label="Professional coaching at your fingertips"
-          title="Expert Guidance"
-          icon={Dumbbell}
-        />
+        {cards.map((card, index) => (
+          <HomeCard
+            key={index}
+            className={`home-card icon-primary`}
+            label={card.label}
+            title={card.title}
+            icon={card.icon}
+          />
+        ))}
       </div>
+
+      {/* <LineUI /> */}
 
       <div style={{ marginTop: '30px' }}>
         <Button
@@ -139,8 +153,6 @@ export default function App() {
                 onClick={() => navigate('/questionnaire')}
               />
             )}
-
-            {/* You can also show other buttons here if needed */}
           </div>
           {hasWorkout && (
             <div className="welcome-actions">
