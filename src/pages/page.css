@@ -6,6 +6,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 1280px;
 }
 
 .card {
@@ -16,7 +17,7 @@
   background-color: rgb(12, 16, 28);
   color: white;
   border: 2px solid rgb(38, 43, 63);
-  width: 50%;
+  width: 100%;
 }
 
 .btn {
@@ -226,7 +227,7 @@ h1 {
 
 .page-container {
   padding: 40px;
-  width: 60%;
+  max-width: 1280px;
   margin: 0 auto;
   position: relative;
 }
@@ -332,12 +333,40 @@ p {
 
 .exercise-card {
   display: flex;
-  flex-direction: column;
   margin-bottom: 16px;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.exercise-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.exercise-reps,
+.exercise-notes {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.exercise-reps,
+.exercise-notes h3 {
+  margin: 0;
+  font-size: 20px;
+  min-width: 90px;
 }
 
 .exercise-name {
-  font-size: 22px;
+  font-size: 26px;
+  margin-bottom: 4px;
 }
 
 .exercise-card p {
@@ -352,13 +381,8 @@ p {
   margin-bottom: 20px;
 }
 
-.section-title {
-  font-size: 26px;
-  margin-bottom: 20px;
-}
-
 .section-results {
-  margin-bottom: 20px;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -378,6 +402,21 @@ p {
 .section-results p strong {
   /* color: rgb(41, 208, 238); */
   font-size: 23px;
+}
+
+.section-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+.section-subtitle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.section-subtitle p {
+  font-size: 20px;
+  color: white;
 }
 
 .plan-action {
@@ -434,6 +473,7 @@ hr {
   color: rgb(41, 208, 238);
   height: 20px;
   width: 20px;
+  margin-top: 4px;
 }
 
 .plan-title {
@@ -461,6 +501,7 @@ hr {
 
 .plan-card.expanded {
   border-color: rgb(41, 208, 238);
+  cursor: auto;
 }
 
 .plan-card.picked {
@@ -661,8 +702,10 @@ hr {
 
 .finished-wrapper {
   display: flex;
-  gap: 16px; /* space between finished and didn't finish */
+  gap: 16px;
   align-items: center;
+  justify-content: center;
+  gap: 50px;
 }
 
 .checkbox-label {
@@ -670,6 +713,7 @@ hr {
   align-items: center;
   gap: 6px;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .label-text {
@@ -697,6 +741,28 @@ hr {
   border-color: #ef4444;
 }
 
+/* hide marks by default */
+.checkbox .checkmark,
+.checkbox .xmark {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+/* hover preview ONLY for finished-wrapper */
+.finished-wrapper .checkbox:hover .checkmark,
+.finished-wrapper .checkbox:hover .xmark {
+  opacity: 0.4;
+}
+
+/* selected state (everywhere) */
+.checkbox.checked .checkmark {
+  opacity: 1;
+}
+
+.checkbox.failed .xmark {
+  opacity: 1;
+}
+
 .checkmark,
 .xmark {
   color: #fff;
@@ -705,7 +771,7 @@ hr {
 }
 
 .next-week-wrapper {
-  margin-top: 20px;
+  margin-top: 30px;
   text-align: center;
 }
 

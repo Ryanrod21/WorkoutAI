@@ -147,26 +147,35 @@ export default function Progression() {
       {step === 0 && (
         <div className="card step-card">
           <ProgressBar progressPercent={progressPercent} show={step > 0} />
-          <h1>Let's Get Started</h1>
-          <p>
-            Lets answer some questions to see how you did to see if we need to
-            change anything !
-          </p>
-          <br></br>
-          <p>
-            If don't want to change anything just hit the skip button and we
-            will get your next weeks of workout ready !
-          </p>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <Button onClick={() => setStep(step + 1)} label="Get Started" />
-            <Button onClick={() => setStep(step + 1)} label="Next" />
-            <Button
-              onClick={() => {
-                setSkipped(true);
-                setStep(step + 6);
-              }}
-              label="Skip"
-            />
+          <div
+            style={{
+              display: 'flex',
+              gap: '40px',
+              justifyContent: 'center',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <h1>Let's Get Started</h1>
+            <p>
+              Lets answer some questions to see how you did to see if we need to
+              change anything !
+            </p>
+
+            <p>
+              If don't want to change anything just hit the skip button and we
+              will get your next weeks of workout ready !
+            </p>
+            <div style={{ display: 'flex', gap: '1rem' }}>
+              <Button onClick={() => setStep(step + 1)} label="Get Started" />
+              <Button
+                onClick={() => {
+                  setSkipped(true);
+                  setStep(step + 6);
+                }}
+                label="Skip"
+              />
+            </div>
           </div>
         </div>
       )}
@@ -319,8 +328,12 @@ export default function Progression() {
       {step === 6 && (
         <div className="card step-card">
           <ProgressBar progressPercent={progressPercent} show={step > 0} />
-          <h2>Confirm Your Selections or Change your selection! </h2>
-          <div>
+          <h1 style={{ marginBottom: '20px', textAlign: 'center' }}>
+            Confirm Your Selections or Change your selection!{' '}
+          </h1>
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}
+          >
             <EditTableField
               label="Days per Week"
               value={data.days}
@@ -389,11 +402,26 @@ export default function Progression() {
             <LocalEditTableField label="Comments" value={q5} onSave={setQ5} />
           </div>
 
-          <p>
+          <p
+            style={{
+              marginTop: '20px',
+              textAlign: 'center',
+              fontSize: '18px',
+              fontFamily: 'Italic',
+            }}
+          >
             Everything correct? Click Finish to generate your AI workout and
             save it.
           </p>
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              gap: '20px',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '20px',
+            }}
+          >
             <Button
               onClick={() => {
                 if (skipped) {

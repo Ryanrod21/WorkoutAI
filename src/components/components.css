@@ -225,3 +225,57 @@
   background-color: black;
   border: 5px solid rgb(41, 208, 238);
 }
+.option-card {
+  background: transparent;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.option-card:hover {
+  background-color: #f0f0f0;
+  color: black;
+}
+
+.option-card.active {
+  background-color: rgb(41, 208, 238);
+  color: white;
+  border-color: white;
+}
+
+.page-bg {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.page-bg::before {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border: 35px solid rgb(41, 208, 238);
+  border-radius: 50%;
+  top: -150px;
+  left: -350px;
+  z-index: 0;
+}
+
+.page-bg::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border: 35px solid rgb(41, 208, 238);
+  border-radius: 50%;
+  bottom: -300px;
+  right: -400px;
+  z-index: 0;
+}
+
+/* Keep content above circles */
+.page-bg > * {
+  position: relative;
+  z-index: 1;
+}

@@ -61,6 +61,13 @@ body {
 
 /* bg-animation */
 
+.background-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1; /* behind app */
+  overflow: hidden;
+}
+
 .bg-wrapper {
   position: absolute;
   inset: 0; /* top:0; right:0; bottom:0; left:0 */
@@ -90,6 +97,42 @@ body {
   height: 384px;
   background: rgba(59, 130, 246, 0.05); /* primary / 5% */
   animation-delay: 1s;
+}
+
+.page-bg {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+}
+
+.page-bg::before {
+  content: '';
+  position: absolute;
+  width: 700px;
+  height: 700px;
+  border: 35px solid rgb(41, 208, 238);
+  border-radius: 50%;
+  top: -150px;
+  left: -350px;
+  z-index: 0;
+}
+
+.page-bg::after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 800px;
+  border: 35px solid rgb(41, 208, 238);
+  border-radius: 50%;
+  bottom: -300px;
+  right: -400px;
+  z-index: 0;
+}
+
+/* Keep content above circles */
+.page-bg > * {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes pulse {
@@ -137,10 +180,6 @@ button {
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.2s;
-}
-
-button:hover {
-  background-color: red;
 }
 
 button:disabled {

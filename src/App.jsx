@@ -79,7 +79,7 @@ export default function App() {
   }
 
   return (
-    <div className="app-container">
+    <div className="app-container page-bg ">
       <BackgroundEffect />
 
       {/* 🔥 Main Homepage Content (everyone sees this) */}

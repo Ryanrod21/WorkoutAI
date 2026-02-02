@@ -5,6 +5,7 @@ import { supabase } from '../lib/supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import { Dumbbell, Zap, Trophy } from 'lucide-react';
 import Button from '../components/button';
+import BackgroundEffect from '../components/UI/BackgroundEffect';
 
 export default function SelectedWorkout() {
   const [gymRow, setGymRow] = useState(null);
@@ -47,19 +48,19 @@ export default function SelectedWorkout() {
     fetchWorkout();
   }, []);
 
-  // Countdown timer
-  useEffect(() => {
-    if (!gymRow) return;
+  // // Countdown timer
+  // useEffect(() => {
+  //   if (!gymRow) return;
 
-    const interval = setInterval(() => {
-      const unlockTime =
-        new Date(gymRow.created_at).getTime() + 7 * 24 * 60 * 60 * 1000;
-      const now = Date.now();
-      setTimeRemaining(Math.max(unlockTime - now, 0));
-    }, 1000);
+  //   const interval = setInterval(() => {
+  //     const unlockTime =
+  //       new Date(gymRow.created_at).getTime() + 7 * 24 * 60 * 60 * 1000;
+  //     const now = Date.now();
+  //     setTimeRemaining(Math.max(unlockTime - now, 0));
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [gymRow]);
+  //   return () => clearInterval(interval);
+  // }, [gymRow]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -127,28 +128,32 @@ export default function SelectedWorkout() {
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
   };
 
-  const handleResults = () => {
-    navigate('/results');
-  };
-
   const handleNextWeek = async () => {
     // 4️⃣ Navigate to progress page
     navigate('/progress');
   };
 
+  console.log('Selected Plan:', selectedPlan);
+  console.log(gymRow);
+
   return (
     <div className="page-container">
-      <h1>Your Workout Plan</h1>
+      <BackgroundEffect />
+
+      <h1>Your Week {gymRow.week} Workout Plan</h1>
 
       <div className="icon-center">
-        <h3>{selectedPlan.category}</h3>
+        <h3 style={{ marginBottom: '40px' }}>{selectedPlan.category}</h3>
         <div className="icon-med-div">
           <Icon className="icon-med" />
         </div>
       </div>
-
-      <h2 className="section-title">Selected Workout</h2>
-      <h3 className="section-title">Daily Breakdown</h3>
+      <div className="section-results">
+        <div className="section-subtitle">
+          <h3 className="section-title">Weekly Breakdown:</h3>
+          <p>{selectedPlan.plan_summary}</p>
+        </div>
+      </div>
       <hr />
 
       {selectedPlan.days.map((day, dayIndex) => (
@@ -193,21 +198,31 @@ export default function SelectedWorkout() {
             <div className="day-exercises">
               {day.exercises.map((exercise, exIndex) => (
                 <div key={exIndex} className="exercise-card">
-                  <div>
-                    <Icon className="icon-bullet" />
+                  <Icon className="icon-bullet" />
+
+                  <div className="exercise-content">
                     <strong className="exercise-name">{exercise.name}</strong>
+                    <div className="exercise-reps">
+                      <h3>Reps/Sets:</h3>
+                      <p>{exercise.reps_sets}</p>
+                    </div>
+                    <div className="exercise-notes">
+                      <h3>Notes:</h3>
+                      <p>{exercise.notes}</p>
+                    </div>
                   </div>
-                  <p className="exercise-reps">
-                    Reps/Sets: {exercise.reps_sets}
-                  </p>
-                  <p className="exercise-notes">Notes: {exercise.notes}</p>
+                  <hr />
                 </div>
               ))}
 
               <div className="finished-wrapper">
                 <label
                   className="checkbox-label"
-                  onClick={() => toggleDayStatus(dayIndex, true)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleDayStatus(dayIndex, true);
+                    setExpandedDayIndex(null);
+                  }}
                 >
                   <div
                     className={`checkbox ${dayStatus[dayIndex] === true ? 'checked' : ''}`}
@@ -221,7 +236,11 @@ export default function SelectedWorkout() {
 
                 <label
                   className="checkbox-label"
-                  onClick={() => toggleDayStatus(dayIndex, false)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleDayStatus(dayIndex, false);
+                    setExpandedDayIndex(null);
+                  }}
                 >
                   <div
                     className={`checkbox ${dayStatus[dayIndex] === false ? 'failed' : ''}`}
@@ -237,12 +256,6 @@ export default function SelectedWorkout() {
           )}
         </div>
       ))}
-
-      <Button
-        className="secondary-button"
-        onClick={handleResults}
-        label="Back to results"
-      />
 
       <div className="next-week-wrapper">
         <Button

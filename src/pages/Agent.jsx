@@ -166,7 +166,7 @@ export default function Agent() {
   };
 
   return (
-    <div style={{ padding: 40, maxWidth: 1080, margin: '0 auto' }}>
+    <div style={{ padding: 40, maxWidth: 1280, margin: '0 auto' }}>
       <div className="results-header">
         {userName && <h2 style={{ color: 'white' }}>Welcome {userName}!</h2>}
         <h1 style={{ color: 'white', fontSize: '50px' }}>

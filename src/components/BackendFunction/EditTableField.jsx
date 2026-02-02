@@ -38,51 +38,25 @@ export default function EditTableField({
   return (
     <div className="editable-card">
       <div className="card-header">
-        <strong>{label}</strong>
-        <Button
-          label="Edit"
-          onClick={() => setEditing(true)}
-          className="pencil-btn"
-        />
+        <h3>{label} :</h3>
+        <p className="card-value">{value}</p>
       </div>
 
-      {!editing && <p className="card-value">{value}</p>}
-
-      {editing && QUESTION_OPTIONS[column] ? (
-        <div className="choices-row">
-          {QUESTION_OPTIONS[column].map((option) => (
-            <div
-              key={option}
-              className={`choice-card ${tempValue === option ? 'selected' : ''}`}
-              onClick={() => setTempValue(option)}
-            >
-              {option}
+      {editing && QUESTION_OPTIONS[column] && (
+        <div className="card-edit">
+          <>
+            <div className="choices-row">
+              {QUESTION_OPTIONS[column].map((option) => (
+                <button
+                  key={option}
+                  className={`option-card ${tempValue === option ? 'active' : ''}`}
+                  onClick={() => setTempValue(option)} // just select
+                >
+                  {option}
+                </button>
+              ))}
             </div>
-          ))}
-          <div className="edit-buttons">
-            <Button
-              label={saving ? 'Saving...' : 'Save'}
-              onClick={handleSave}
-              disabled={saving}
-            />
-            <Button
-              label="Cancel"
-              onClick={() => {
-                setTempValue(value);
-                setEditing(false);
-              }}
-            />
-          </div>
-        </div>
-      ) : (
-        editing && (
-          <div className="edit-input-wrapper">
-            <input
-              type="text"
-              value={tempValue}
-              onChange={(e) => setTempValue(e.target.value)}
-              className="edit-input"
-            />
+
             <div className="edit-buttons">
               <Button
                 label={saving ? 'Saving...' : 'Save'}
@@ -95,10 +69,19 @@ export default function EditTableField({
                   setTempValue(value);
                   setEditing(false);
                 }}
+                disabled={saving}
               />
             </div>
-          </div>
-        )
+          </>
+        </div>
+      )}
+
+      {!editing && (
+        <Button
+          label="Edit"
+          onClick={() => setEditing(true)}
+          className="pencil-btn"
+        />
       )}
     </div>
   );
