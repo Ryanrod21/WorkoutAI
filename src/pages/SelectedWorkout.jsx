@@ -148,9 +148,8 @@ export default function SelectedWorkout() {
       </div>
 
       <h2 className="section-title">Selected Workout</h2>
-      <hr />
-
       <h3 className="section-title">Daily Breakdown</h3>
+      <hr />
 
       {selectedPlan.days.map((day, dayIndex) => (
         <div
@@ -163,7 +162,9 @@ export default function SelectedWorkout() {
           }}
         >
           <div className="select-header">
-            <div className="plan-title">
+            <div
+              className={`plan-title ${expandedDayIndex === dayIndex ? 'expanded' : ''}`}
+            >
               <h4 className="day-title">
                 {day.day} — {day.focus}
               </h4>
@@ -175,7 +176,7 @@ export default function SelectedWorkout() {
                     ? 'checked'
                     : dayStatus[dayIndex] === false
                       ? 'failed'
-                      : '' /* empty by default */
+                      : ''
                 }`}
               >
                 {dayStatus[dayIndex] === true && (
@@ -192,8 +193,10 @@ export default function SelectedWorkout() {
             <div className="day-exercises">
               {day.exercises.map((exercise, exIndex) => (
                 <div key={exIndex} className="exercise-card">
-                  <Icon className="icon-bullet" />
-                  <strong className="exercise-name">{exercise.name}</strong>
+                  <div>
+                    <Icon className="icon-bullet" />
+                    <strong className="exercise-name">{exercise.name}</strong>
+                  </div>
                   <p className="exercise-reps">
                     Reps/Sets: {exercise.reps_sets}
                   </p>

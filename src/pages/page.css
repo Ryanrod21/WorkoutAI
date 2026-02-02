@@ -282,9 +282,10 @@ p {
   align-items: center;
   justify-content: center;
   background-color: rgba(129, 129, 129, 0.151);
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   border-radius: 20px;
+  flex-shrink: 0;
 }
 
 .icon-small {
@@ -332,6 +333,7 @@ p {
 .exercise-card {
   display: flex;
   flex-direction: column;
+  margin-bottom: 16px;
 }
 
 .exercise-name {
@@ -342,12 +344,47 @@ p {
   font-size: 20px;
 }
 
+.results-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 26px;
+  margin-bottom: 20px;
+}
+
 .section-results {
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.section-results h2 {
+  font-size: 30px;
+  margin-bottom: 10px;
 }
 
 .section-results p {
   margin: 6px 0;
+  font-size: 23px;
+}
+
+.section-results p strong {
+  /* color: rgb(41, 208, 238); */
+  font-size: 23px;
+}
+
+.plan-action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 hr {
@@ -404,6 +441,10 @@ hr {
   flex-direction: column;
 }
 
+.plan-title.expanded {
+  margin-bottom: 30px;
+}
+
 .plan-title h3 {
   font-size: 25px;
 }
@@ -455,6 +496,11 @@ hr {
   transition:
     opacity 0.2s ease,
     transform 0.2s ease;
+}
+
+.plan-action .pick-button {
+  font-size: 20px;
+  padding: 12px 20px;
 }
 
 .pick-button:hover {
@@ -667,4 +713,44 @@ hr {
   margin-top: 8px;
   font-size: 14px;
   color: #555;
+}
+
+.button-row {
+  display: flex;
+  margin-top: 30px;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.question-results {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  gap: 30px;
+  align-items: center;
+}
+
+.question-answer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.question-answer.card {
+  width: 80%;
+}
+
+.question-answer h3 {
+  font-size: 22px;
+  color: white;
+}
+
+.question-answer p {
+  font-size: 18px;
+}
+
+.question-results .editable-card {
+  width: 80%;
 }

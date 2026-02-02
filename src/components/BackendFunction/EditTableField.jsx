@@ -40,7 +40,7 @@ export default function EditTableField({
       <div className="card-header">
         <strong>{label}</strong>
         <Button
-          label="✏️"
+          label="Edit"
           onClick={() => setEditing(true)}
           className="pencil-btn"
         />

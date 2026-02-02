@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
 import { supabase } from '../lib/supabaseClient.js';
 import { Dumbbell, Zap, Trophy } from 'lucide-react';
+import Button from '../components/button.jsx';
 
 export default function Agent() {
   const navigate = useNavigate();
@@ -156,6 +157,8 @@ export default function Agent() {
     }
   };
 
+  console.log('Gym Row:', gymRow);
+
   const categoryIcons = {
     'Strength Builder': Dumbbell,
     'Endurance Elite': Zap,
@@ -163,21 +166,27 @@ export default function Agent() {
   };
 
   return (
-    <div style={{ padding: 40, maxWidth: 900, margin: '0 auto' }}>
-      <h1 style={{ color: 'white' }}>Your Workout Summary</h1>
-      {userName && <h2 style={{ color: 'white' }}>Welcome, {userName}</h2>}
+    <div style={{ padding: 40, maxWidth: 1080, margin: '0 auto' }}>
+      <div className="results-header">
+        {userName && <h2 style={{ color: 'white' }}>Welcome {userName}!</h2>}
+        <h1 style={{ color: 'white', fontSize: '50px' }}>
+          Your Workout Summary
+        </h1>
+        <h2 style={{ fontSize: '30px' }}>Week: {gymRow.week}</h2>
+      </div>
 
-      <section className="section-results">
+      <div className="section-results">
         <p>
           <strong>Goal:</strong> {gymRow.goal}
         </p>
         <p>
-          <strong>Training Days:</strong> {gymRow.days} days per week
+          <strong>Training Days:</strong> {gymRow.days} days per week for
+          approximately {gymRow.minutes} minutes each session
         </p>
         <p>
           <strong>Training Location:</strong> {gymRow.location}
         </p>
-      </section>
+      </div>
 
       <hr />
 
@@ -227,16 +236,16 @@ export default function Agent() {
       </div>
 
       <div className="plan-action">
-        <button
-          className="pick-button"
+        <Button
+          label="Confirm workout"
           disabled={tempPickedIndex === null || saving}
           onClick={(e) => {
             e.stopPropagation();
             handleConfirmPick();
           }}
-        >
-          {saving ? 'Saving...' : 'Confirm workout'}
-        </button>
+          className="pick-button"
+        />
+        {saving && <div className="loader-small"></div>}
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import Button from '../components/button';
 import './page.css';
 import ProgressBar from '../components/UI/ProgressBar';
 import BackgroundEffect from '../components/UI/BackgroundEffect';
+import LocalEditableField from '../components/BackendFunction/LocalEditField';
 
 export default function Questionnaire() {
   const [step, setStep] = useState(0);
@@ -12,7 +13,7 @@ export default function Questionnaire() {
   const [daysText, setDaysText] = useState(null);
   const [trainText, setTrainText] = useState('');
   const [experienceText, setExperienceText] = useState('');
-  const [minutesText, setMintuesText] = useState(null);
+  const [minutesText, setMinutesText] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function Questionnaire() {
       location: trainText,
       experience: experienceText,
       minutes: minutesText,
+      week: 1,
     };
     setLoading(true);
 
@@ -60,6 +62,7 @@ export default function Questionnaire() {
         location: trainText,
         minutes: minutesText,
         experience: experienceText,
+        week: 1,
         plans: aiResults,
       };
 
@@ -73,6 +76,7 @@ export default function Questionnaire() {
             location: trainText,
             experience: experienceText,
             minutes: minutesText,
+            week: 1,
             plans: aiResults,
             user_id: user.id,
             selected_plan: null, // not picked yet
@@ -148,7 +152,7 @@ export default function Questionnaire() {
               'Lose Weight',
               'Build Muscle',
               'Improve Endurance',
-              'Genral Fitness',
+              'General Fitness',
             ].map((goal) => (
               <label key={goal}>
                 <input
@@ -161,7 +165,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -196,7 +200,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -225,7 +229,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -248,14 +252,14 @@ export default function Questionnaire() {
                   type="radio"
                   value={d}
                   checked={minutesText === d}
-                  onChange={(e) => setMintuesText(Number(e.target.value))}
+                  onChange={(e) => setMinutesText(Number(e.target.value))}
                 />
                 {d === 90 ? '90+ minutes' : `${d} minutes`}
               </label>
             ))}
           </div>
 
-          <div>
+          <div className="button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -289,7 +293,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -304,27 +308,71 @@ export default function Questionnaire() {
       {step === 6 && (
         <div className="card step-card">
           <ProgressBar progressPercent={progressPercent} show={step > 0} />
-          <h2>Confirm Your Selections</h2>
-          <p>
-            <strong>Goal:</strong> {goalText}
-          </p>
-          <p>
-            <strong>Experience:</strong> {experienceText}
-          </p>
-          <p>
-            <strong>Days per week:</strong> {daysText}
-          </p>
-          <p>
-            <strong>Minutes per Session:</strong> {minutesText}
-          </p>
-          <p>
-            <strong>Training location:</strong> {trainText}
-          </p>
-          <p>
-            Everything correct? Click Finish to generate your AI workout and
-            save it.
-          </p>
-          <div>
+          <div className="question-results">
+            <h1>Confirm Your Selections</h1>
+
+            <LocalEditableField
+              label="Goals:"
+              value={goalText}
+              onSave={setGoalText}
+              options={[
+                'Lose Weight',
+                'Build Muscle',
+                'Improve Endurance',
+                'General Fitness',
+              ]}
+            />
+
+            <LocalEditableField
+              label="Experience:"
+              value={experienceText}
+              onSave={setExperienceText}
+              options={[
+                'Beginner - New to working out',
+                'Intermediate - 1-2 years experience',
+                'Advanced - 3+ years experience',
+                'Athelete - Professional Level',
+              ]}
+            />
+
+            <LocalEditableField
+              label="Days per week:"
+              value={daysText}
+              onSave={setDaysText}
+              options={[3, 4, 5, 6]}
+            />
+
+            <LocalEditableField
+              label="Minutes per session:"
+              value={minutesText}
+              onSave={setMinutesText}
+              options={[30, 45, 60, 90]}
+            />
+
+            <LocalEditableField
+              label="Training location:"
+              value={trainText}
+              onSave={setTrainText}
+              options={[
+                'Gym with equipment',
+                'Home with minimal equipment',
+                'Outdoor activities',
+                'Mixed / Flexible',
+              ]}
+            />
+            <p
+              style={{
+                fontStyle: 'italic',
+                marginTop: '20px',
+                fontSize: '20px',
+              }}
+            >
+              Everything correct? Click Finish to generate your AI workout and
+              save it.
+            </p>
+          </div>
+
+          <div className="button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous Step" />
             <Button
               onClick={handleFinish}
