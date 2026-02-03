@@ -137,7 +137,7 @@ export default function SelectedWorkout() {
   console.log(gymRow);
 
   return (
-    <div className="page-container">
+    <div className="page-container ">
       <BackgroundEffect />
 
       <h1>Your Week {gymRow.week} Workout Plan</h1>

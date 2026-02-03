@@ -165,7 +165,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div className="button-row">
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -200,7 +200,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div className="button-row">
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -229,7 +229,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div className="button-row">
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -259,7 +259,7 @@ export default function Questionnaire() {
             ))}
           </div>
 
-          <div className="button-row">
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -293,7 +293,7 @@ export default function Questionnaire() {
               </label>
             ))}
           </div>
-          <div className="button-row">
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}

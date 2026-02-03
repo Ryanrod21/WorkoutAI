@@ -197,7 +197,7 @@ export default function Progression() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -226,7 +226,7 @@ export default function Progression() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -255,7 +255,7 @@ export default function Progression() {
               </label>
             ))}
           </div>
-          <div>
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -288,7 +288,7 @@ export default function Progression() {
             ))}
           </div>
 
-          <div>
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}
@@ -313,7 +313,7 @@ export default function Progression() {
             className="text-input" // optional styling
           />
 
-          <div>
+          <div className="progress-button-row">
             <Button onClick={() => setStep(step - 1)} label="Previous" />
             <Button
               onClick={() => setStep(step + 1)}

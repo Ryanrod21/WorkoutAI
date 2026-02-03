@@ -230,6 +230,7 @@ h1 {
   max-width: 1280px;
   margin: 0 auto;
   position: relative;
+  z-index: 0;
 }
 
 h1,
@@ -819,4 +820,15 @@ hr {
 
 .question-results .editable-card {
   width: 80%;
+}
+
+.progress-button-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+.progress-button-row button {
+  min-width: 120px;
 }

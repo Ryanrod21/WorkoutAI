@@ -153,7 +153,7 @@ export default function Demo() {
   }, [slideIndex]);
 
   return (
-    <div className="landing-page">
+    <div className="landing-page ">
       <BackgroundEffect />
       <div className="card step-card">
         {slideIndex > 0 && (
