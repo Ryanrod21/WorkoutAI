@@ -59,6 +59,8 @@ export default function Progression() {
       data: { user },
     } = await supabase.auth.getUser();
 
+    setLoading(true);
+
     if (!user) {
       alert('You must be logged in to save your progress.');
       return;
@@ -123,7 +125,7 @@ export default function Progression() {
         alert('Failed to save progress.');
         return;
       }
-
+       setLoading(false);
       navigate('/results'); // Navigate to results page
     } catch (err) {
       console.error(err);

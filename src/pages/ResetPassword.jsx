@@ -10,7 +10,6 @@ export default function PasswordReset() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // 🔐 Check if user is in recovery session
     supabase.auth.getSession().then(({ data }) => {
       if (!data.session) {
         setError("Invalid or expired password reset link.");
