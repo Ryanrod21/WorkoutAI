@@ -834,7 +834,12 @@ hr {
 }
 
 /* Small phones (375px - 479px) */
-@media screen and (min-width: 375px) {
+@media screen and (max-width: 375px) {
+  
+}
+
+/* Larger phones (480px - 639px) */
+@media screen and (max-width: 480px) {
   .dialogue-box {
     padding: 10px 12px;
   }
@@ -853,32 +858,27 @@ hr {
   }
 }
 
-/* Larger phones (480px - 639px) */
-@media screen and (min-width: 480px) {
-  /* Styles for larger phones */
-}
-
 /* Tablets / large phones portrait */
-@media screen and (min-width: 640px) {
+@media screen and (max-width: 640px) {
   /* Styles for tablets */
 }
 
 /* Tablets landscape / small laptops */
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 768px) {
   /* Styles for tablets landscape / small laptops */
 }
 
 /* Laptops / desktops */
-@media screen and (min-width: 1024px) {
+@media screen and (max-width: 1024px) {
   /* Styles for laptops / desktops */
 }
 
 /* Large desktops */
-@media screen and (min-width: 1280px) {
+@media screen and (max-width: 1280px) {
   /* Styles for large desktops */
 }
 
 /* Ultra-wide screens */
-@media screen and (min-width: 1536px) {
+@media screen and (max-width: 1536px) {
   /* Styles for ultra-wide screens */
 }
